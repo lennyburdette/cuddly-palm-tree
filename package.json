@@ -23,6 +23,7 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "codegen": "graphql-codegen --config codegen.yml && tsc -p studio"
+    "codegen": "graphql-codegen --config codegen.yml && tsc -p studio",
+    "postinstall": "patch-package"
   }
 }
