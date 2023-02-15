@@ -11,4 +11,5 @@ directive @owner(team: String!) on OBJECT
 type Product @key(fields: "id") @owner(team: "subgraph-a") {
   id: ID!
   name: String
+  bar: String
 }
