@@ -42,21 +42,25 @@ runExit(
       const affectedTypes = await getAffectedTypes(this.schema, this.gitref);
 
       this.context.stdout.write(
-        `AFFECTED TYPES\n${[...affectedTypes].join(", ")}`
+        `AFFECTED TYPES\n${[...affectedTypes].join(", ")}\n\n`
       );
+
+      if (affectedTypes.size === 0) return 0;
 
       const affectedOwners = getAffectedOwners(supergraph, affectedTypes);
 
       this.context.stdout.write(
-        `AFFECTED OWNERS\n${[...affectedTypes].join(", ")}`
+        `AFFECTED OWNERS\n${[...affectedOwners].join(", ")}\n\n`
       );
+
+      if (affectedOwners.size === 0) return 0;
 
       const response = await assignReviewers(repo, parseInt(this.pull, 10), [
         ...affectedOwners,
       ]);
 
       this.context.stdout.write(
-        `GITHUB RESPONSE\n${JSON.stringify(response, null, 2)}`
+        `GITHUB RESPONSE\n${JSON.stringify(response, null, 2)}\n`
       );
     }
   }

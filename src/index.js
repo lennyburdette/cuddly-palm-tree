@@ -27,6 +27,8 @@ export async function getSupergraph(graphRef) {
     ref: graphRef,
   });
 
+  console.log(supergraphResp);
+
   /** @type {string} */
   const sdl =
     supergraphResp.variant?.__typename === "GraphVariant" &&
@@ -34,7 +36,11 @@ export async function getSupergraph(graphRef) {
       "BuildSuccess"
       ? supergraphResp.variant.latestApprovedLaunch.build.result.coreSchema
           .coreDocument
-      : "";
+      : undefined;
+
+  if (!sdl) {
+    throw new Error(`Missing supergraph for ${graphRef}`);
+  }
 
   return buildSchema(sdl);
 }
