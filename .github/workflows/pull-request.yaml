@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
       - run: yarn install --frozen-lockfile
-      - uses: hmarr/debug-action
+      - uses: hmarr/debug-action@v2
       - run: |
           node ./bin/index.js \
             --name ${{ env.SUBGRAPH_NAME }} \
