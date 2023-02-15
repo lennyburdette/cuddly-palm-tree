@@ -11,6 +11,7 @@ directive @owner(team: String!) on OBJECT
 type Product @key(fields: "id") @owner(team: "lennyburdette") {
   id: ID!
   name: String
+  foo: String
 }
 
 type Query {
