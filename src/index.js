@@ -27,8 +27,6 @@ export async function getSupergraph(graphRef) {
     ref: graphRef,
   });
 
-  console.log(supergraphResp);
-
   /** @type {string} */
   const sdl =
     supergraphResp.variant?.__typename === "GraphVariant" &&
