@@ -1,0 +1,14 @@
+extend schema
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.3"
+    import: ["@key", "@composeDirective"]
+  )
+  @link(url: "https://graphql.mycompany.dev/owner/v1.0")
+  @composeDirective(name: "@owner")
+
+directive @owner(team: String!) on OBJECT
+
+type Product @key(fields: "id") @owner(team: "subgraph-a") {
+  id: ID!
+  name: String
+}

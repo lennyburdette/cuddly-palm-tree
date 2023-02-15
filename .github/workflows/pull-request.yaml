@@ -1,0 +1,32 @@
+name: Pull Request
+
+on:
+  pull_request:
+
+env:
+  SUBGRAPH_NAME: subgraph-a
+  APOLLO_GRAPH_REF: lenny-federation2@owner-demo
+
+jobs:
+  add-reviewers:
+    name: Add reviewers for owned types
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: |
+          node ./bin/index.js \
+            --name ${{ env.SUBGRAPH_NAME }} \
+            --pr ${{ github.event.number }} \
+            --schema schema.graphql \
+            --gitref ${{ github.base_ref }} \
+            --graphref ${{ env.APOLLO_GRAPH_REF }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
