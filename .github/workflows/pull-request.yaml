@@ -25,7 +25,7 @@ jobs:
             --name ${{ env.SUBGRAPH_NAME }} \
             --pr ${{ github.event.number }} \
             --schema schema.graphql \
-            --gitref ${{ github.base_ref }} \
+            --gitref ${{ github.event.pull_request.base.sha }} \
             --graphref ${{ env.APOLLO_GRAPH_REF }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
