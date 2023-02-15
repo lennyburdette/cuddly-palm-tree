@@ -58,8 +58,8 @@ export async function getAffectedTypes(file, gitref) {
   console.log(previous);
 
   const result = await diff(
-    buildSchema(current, { assumeValidSDL: true }),
-    buildSchema(previous, { assumeValidSDL: true })
+    buildSchema(previous, { assumeValidSDL: true }),
+    buildSchema(current, { assumeValidSDL: true })
   );
 
   /** @type {Set<string>} */
