@@ -16,10 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-        with:
-          node-version: "16.x"
-          cache: yarn
       - run: yarn install --frozen-lockfile
+      - uses: hmarr/debug-action
       - run: |
           node ./bin/index.js \
             --name ${{ env.SUBGRAPH_NAME }} \
